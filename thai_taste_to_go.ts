@@ -24,32 +24,41 @@ var dinnerOrders = [
 
 (async () => {
   const browser = await webkit.launch();
-  const page = await browser.newPage();
-  await page.goto('https://thaitastetogomi.smiledining.com/');
+  const context = await browser.newContext({
+    recordVideo: { dir: 'video' }
+  })
+  const page = await context.newPage();
 
-  // exit popup
-  await page.click('button.close.close-button');
-  await page.waitForTimeout(1000);
+  try {
+    await page.goto('https://thaitastetogomi.smiledining.com/');
 
-  // check which menu is available
-  const isLunchMenu = await page.evaluate(el => el.classList.contains('theme'), await page.$('label[for="tab1"]'));
-  console.log(`isLunchMenu: ${isLunchMenu}`);
-  const order = isLunchMenu ? 
-    lunchOrders[Math.floor(Math.random()*lunchOrders.length)] :
-    dinnerOrders[Math.floor(Math.random()*dinnerOrders.length)];
-  console.log(`order: ${order.name}`);
+    // exit popup
+    await page.click('button.close.close-button');
+    await page.waitForTimeout(1000);
 
-  // click food entry
-  await page.click(`css=span.foodName-text >> text="${order.name}"`);
-  await page.waitForTimeout(1000);
+    // check which menu is available
+    const isLunchMenu = await page.evaluate(el => el.classList.contains('theme'), await page.$('label[for="tab1"]'));
+    console.log(`isLunchMenu: ${isLunchMenu}`);
+    const order = isLunchMenu ? 
+      lunchOrders[Math.floor(Math.random()*lunchOrders.length)] :
+      dinnerOrders[Math.floor(Math.random()*dinnerOrders.length)];
+    console.log(`order: ${order.name}`);
 
-  // select options - needs to include "special" notes for order
-  const chickenValue = "Srd8o2evE8g=";
-  const mediumPlusValue = "D4g2pzByV40=";
-  await page.click(`input[value="${chickenValue}"] >> visible=true`);
-  await page.click(`input[value="${mediumPlusValue}"] >> visible=true`);
-  await page.waitForTimeout(1000);
+    // click food entry
+    await page.click(`css=span.foodName-text >> text="${order.name}"`);
+    await page.waitForTimeout(1000);
 
-  await page.screenshot({ path: `example.png` });
+    // select options - needs to include "special" notes for order
+    const chickenValue = "Srd8o2evE8g=";
+    const mediumPlusValue = "D4g2pzByV40=";
+    await page.click(`input[value="${chickenValue}"] >> visible=true`);
+    await page.click(`input[value="${mediumPlusValue}"] >> visible=true`);
+    await page.waitForTimeout(1000);
+  } catch (err) {
+    await context.close();
+    throw err;
+  }
+
+  await context.close();
   await browser.close();
 })();
