@@ -26,5 +26,8 @@
 	"remoteUser": "vscode",
 	"features": {
 		"node": "lts"
-	}
+	},
+
+	// add environment variables from .env
+	"runArgs": ["--env-file", ".devcontainer/.env"]
 }
