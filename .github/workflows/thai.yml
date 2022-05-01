@@ -1,0 +1,36 @@
+name: Thai
+
+on:
+  schedule:
+  - cron: '0 20 * * *'
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '16.x'
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    env:
+      FIRST_NAME: ${{ secrets.FIRST_NAME }}
+      LAST_NAME: ${{ secrets.LAST_NAME }}
+      CC_NUMBER: ${{ secrets.CC_NUMBER }}
+      CC_EXPIRY: ${{ secrets.CC_EXPIRY }}
+      CC_CVC: ${{ secrets.CC_CVC }}
+      ADDRESS: ${{ secrets.ADDRESS }}
+      ZIP: ${{ secrets.ZIP }}
+    steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@v2
+    - name: Setup Node ${{ env.NODE_VERSION }} Environment
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+    - name: Install dependencies
+      run: npm i
+    - name: Perform dry run
+      if: ${{ github.event_name }} == "schedule"
+      run: node thai_taste_to_go.js
+    - name: Order food
+      if: ${{ github.event_name }} == "workflow_dispatch"
+      run: node thai_taste_to_go.js -live
