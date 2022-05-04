@@ -4,6 +4,9 @@ on:
   schedule:
   - cron: '0 20 * * *'
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 env:
   NODE_VERSION: '16.x'
@@ -29,8 +32,8 @@ jobs:
     - name: Install dependencies
       run: npm i
     - name: Perform dry run
-      if: ${{ github.event_name }} == "schedule"
-      run: node thai_taste_to_go.js
+      if: ${{ github.event_name }} != "workflow_dispatch"
+      run: node thai_taste_to_go.ts
     - name: Order food
       if: ${{ github.event_name }} == "workflow_dispatch"
-      run: node thai_taste_to_go.js -live
+      run: node thai_taste_to_go.ts -live
