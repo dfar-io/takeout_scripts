@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "postinstall": "npx playwright install-deps"
+  },
   "devDependencies": {
     "playwright": "^1.21.1"
   }
