@@ -34,8 +34,8 @@ jobs:
     - name: Install dependencies
       run: npm i
     - name: Perform dry run
-      if: github.event_name != "workflow_dispatch"
+      if: github.event_name != 'workflow_dispatch'
       run: node thai_taste_to_go.ts
     - name: Order food
-      if: github.event_name == "workflow_dispatch"
+      if: github.event_name == 'workflow_dispatch'
       run: node thai_taste_to_go.ts -live
