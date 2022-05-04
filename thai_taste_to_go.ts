@@ -65,8 +65,8 @@ var dinnerOrders = [
     // fill out guest information
     await page.fill('#txtGuestFirstName', env.FIRST_NAME);
     await page.fill('#txtGuestLastName', env.LAST_NAME);
-    await page.fill('#txtGuestEmail', 'a@a.com');
-    await page.fill('#txtGuestPhone', '(123) 456-7890');
+    await page.fill('#txtGuestEmail', env.EMAIL);
+    await page.fill('#txtGuestPhone', env.PHONE_NUMBER);
     await page.click(`#btn-next-user`);
 
     // progress to CC info
@@ -80,10 +80,12 @@ var dinnerOrders = [
     await page.fill('#txtBillingAddress', env.ADDRESS);
     await page.fill('#txtBillingZip', env.ZIP);
     await page.click('button[value="10"]');
+    await page.click(`button.theme-btn-checkout >> nth=6`);
 
     // click confirm if non-dry run.
     if (isLiveRun) {
       await page.click('button.swal2-confirm');
+      await page.waitForTimeout(6000);
     } else {
       console.log('Dry run: order not submitted.');
     }
@@ -104,7 +106,9 @@ function getEnvVars() {
     CC_EXPIRY: process.env.CC_EXPIRY,
     CC_CVC: process.env.CC_CVC,
     ADDRESS: process.env.ADDRESS,
-    ZIP: process.env.ZIP
+    ZIP: process.env.ZIP,
+    EMAIL: process.env.EMAIL,
+    PHONE_NUMBER: process.env.PHONE_NUMBER
   };
     
   verifyEnvVars(envVars)

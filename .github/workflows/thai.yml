@@ -22,6 +22,8 @@ jobs:
       CC_CVC: ${{ secrets.CC_CVC }}
       ADDRESS: ${{ secrets.ADDRESS }}
       ZIP: ${{ secrets.ZIP }}
+      EMAIL: ${{ secrets.EMAIL }}
+      PHONE_NUMBER: ${{ secrets.PHONE_NUMBER }}
     steps:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@v2
