@@ -4,19 +4,11 @@ const { webkit } = require('playwright');
 
 var lunchOrders = [
 {
-  name: 'LN1 Pad Thai',
-  special: 'no peanuts'
-},
-{
   name: 'LK6 Kow Pad Kra Tiem',
   special: 'no onions'
 }];
 
 var dinnerOrders = [
-{
-  name: 'N1 Pad Thai',
-  special: 'no peanuts'
-},
 {
   name: 'K6 Kow Pad Kra Tiem',
   special: 'no onions'
