@@ -40,3 +40,7 @@ jobs:
     - name: Order food
       if: github.event_name == 'workflow_dispatch'
       run: node thai_taste_to_go.ts -live
+    - uses: actions/upload-artifact@v3
+      if: ${{ failure() }}
+      with:
+        path: video/*
