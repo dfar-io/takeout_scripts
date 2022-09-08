@@ -3,6 +3,6 @@
     "postinstall": "npx playwright install-deps"
   },
   "devDependencies": {
-    "playwright": "^1.21.1"
+    "playwright": "^1.25.2"
   }
 }

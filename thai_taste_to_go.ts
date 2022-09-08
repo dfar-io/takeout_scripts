@@ -59,6 +59,8 @@ var dinnerOrders = [
     await page.fill('#txtGuestLastName', env.LAST_NAME);
     await page.fill('#txtGuestEmail', env.EMAIL);
     await page.fill('#txtGuestPhone', env.PHONE_NUMBER);
+    // let's try waiting to see if there's an issue populating fields
+    await page.waitForTimeout(2000);
     await page.click(`#btn-next-user`);
 
     // progress to CC info
