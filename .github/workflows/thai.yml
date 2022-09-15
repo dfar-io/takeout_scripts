@@ -5,9 +5,6 @@ on:
   # closed on Tuesday, don't run then
   - cron: '0 20 * * 0,1,3,4,5,6'
   workflow_dispatch:
-  push:
-    branches:
-      - main
 
 env:
   NODE_VERSION: '16.x'
