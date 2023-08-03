@@ -2,7 +2,7 @@ name: Thai
 
 on:
   schedule:
-  - cron: '0 20 * * *'
+  - cron: '0 16 * * *'
   workflow_dispatch:
     inputs:
       should-apply:
