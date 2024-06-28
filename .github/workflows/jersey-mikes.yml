@@ -1,4 +1,4 @@
-name: Thai
+name: Jersey Mike's
 
 on:
   schedule:
@@ -35,10 +35,10 @@ jobs:
       run: npm i
     - name: Perform dry run
       if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.should-apply != 'y' }}
-      run: node thai_taste_to_go.ts
+      run: node jersey_mikes.ts
     - name: Order food
       if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.should-apply == 'y' }}
-      run: node thai_taste_to_go.ts -live
+      run: node jersey_mikes.ts -live
     - uses: actions/upload-artifact@v3
       if: ${{ failure() }}
       with:

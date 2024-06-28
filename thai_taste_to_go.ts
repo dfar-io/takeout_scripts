@@ -1,3 +1,6 @@
+// 2024.06.28
+// Cloudflare CAPTCHA added to checkout, no longer able to automate
+
 //@ts-check
 
 const { webkit } = require('playwright');
