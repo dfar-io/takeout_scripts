@@ -20,8 +20,8 @@ const { webkit } = require('playwright');
 
     // select store
     await page.fill('#input-field-address', env.ZIP);
-    await page.click(`h4:text-is("${env.ZIP}")`);
-    await page.click('h4:text-is("West Bloomfield")');
+    await page.click(`p:text-is("${env.ZIP}")`);
+    await page.click('p:text-is("West Bloomfield")');
     await page.click('button:text-is("In-Store Pickup")');
 
     // select sandwich, customize, add to order
@@ -42,6 +42,7 @@ const { webkit } = require('playwright');
     await page.fill('#input-field-account-form-firstName', env.FIRST_NAME);
     await page.fill('#input-field-account-form-lastName', env.LAST_NAME);
     await page.fill('#input-field-account-form-mobileNumber', env.PHONE_NUMBER);
+    await page.fill('#input-field-account-form-email', env.EMAIL);
     await page.click('button:text-is("Continue")');
 
     // enter CC info through iframe
@@ -52,11 +53,12 @@ const { webkit } = require('playwright');
     await targetFrame.locator('#cvv').fill(env.CC_CVC);
     await targetFrame.locator('#zip').fill(env.ZIP);
     await targetFrame.locator('.containerBtn').click();
+    await page.waitForTimeout(5000);
 
     // place order only for live runs
     if (isLiveRun) {
       await page.click('button:has-text("Place Order")');
-      await page.waitForTimeout(10000);
+      await page.waitForTimeout(30000);
     } else {
       console.log('Dry run: order not submitted.');
     }
