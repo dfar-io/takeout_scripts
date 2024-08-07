@@ -25,7 +25,7 @@ const { webkit } = require('playwright');
     await page.click('button:text-is("In-Store Pickup")');
 
     // select sandwich, customize, add to order
-    await page.click('div:text-is("Turkey and Provolone")');
+    await page.click('h2:text-is("Turkey and Provolone")');
     await page.click('div#select-size');
     await page.click('p:text-is("Giant")');
     await page.click('div#select-bread');
