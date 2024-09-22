@@ -1,8 +1,10 @@
+# Deactivated - never got this working
+
 name: Jersey Mike's
 
 on:
-  schedule:
-  - cron: '0 16 * * *'
+  # schedule:
+  # - cron: '0 16 * * *'
   workflow_dispatch:
     inputs:
       should-apply:
